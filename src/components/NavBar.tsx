@@ -37,7 +37,9 @@ const NavBar = () => {
               </Link>
             </Nav>
             <Nav className="d-flex">
-              <Nav.Link href="#deets">Menu</Nav.Link>
+              <Nav.Link href="#menu" style={{scrollBehavior: "smooth"}}>
+                Menu
+              </Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">

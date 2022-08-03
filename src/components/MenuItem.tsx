@@ -1,19 +1,20 @@
 import React from "react";
 import { Card, Col, Image, Row } from "react-bootstrap";
+import { AppProps } from "../types";
 
-const MenuItem = ({ item }: any) => {
+const MenuItem = ({ item }:AppProps) => {
   return (
-    <Col key={item.id}>
+    <Col key={item?.id}>
       <Card className="" border="primary">
-        <Row>
-          <Col>
-            <Image thumbnail src={item.img} width="90%" />
+        <Row className="g-0">
+          <Col md={5}>
+            <Image thumbnail src={item?.img} width="90%" />
           </Col>
-          <Col>
+          <Col md={7} className="text-start">
             <Card.Body>
-              <Card.Title>{item.title}</Card.Title>
-              <Card.Text>{item.content}</Card.Text>
-              <Card.Text>{item.price}</Card.Text>
+              <Card.Title>{item?.name}</Card.Title>
+              <Card.Text>{item?.description}</Card.Text>
+              <Card.Text>{item?.price}</Card.Text>
             </Card.Body>
           </Col>
         </Row>

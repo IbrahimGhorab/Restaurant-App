@@ -1,11 +1,12 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { AppProps } from "../types";
 
-const Cart = ({ show, handleClose }: any) => {
-    const [ ]=
+const Cart = ({ show, handleClose }: AppProps) => {
+    
   return (
-    <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+    <Modal show={show} onHide={()=>handleClose} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
         <Modal.Title>Modal title</Modal.Title>
       </Modal.Header>
@@ -14,7 +15,7 @@ const Cart = ({ show, handleClose }: any) => {
         key.
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="secondary" onClick={()=>handleClose}>
           Close
         </Button>
         <Link to="/checkout">
