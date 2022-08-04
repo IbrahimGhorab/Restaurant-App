@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { AppProps } from "../types";
+import { AppProp } from "../types";
 
-const FilterButtons = ({ updateFilter }: AppProps) => {
+const FilterButtons = ({ updateFilter }: AppProp) => {
   return (
     <div className="mt-4" id="menu">
       <Button onClick={ () => updateFilter && updateFilter("All")} variant="outline-primary">

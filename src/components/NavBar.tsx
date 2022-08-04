@@ -3,15 +3,13 @@ import { useState } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
 import { ImSpoonKnife } from "react-icons/im";
-import { BsCart4 } from "react-icons/bs";
+import {MdDeliveryDining} from "react-icons/md";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+const NavBar = () => {
+  const [smShow, setSmShow] = useState(false);
   return (
     <>
       <Navbar
@@ -19,6 +17,7 @@ const NavBar = () => {
         expand="lg"
         style={{ backgroundColor: "#303030" }}
         variant="dark"
+        
       >
         <Container>
           <Navbar.Brand href="#home" className="fs-2 fw-bold">
@@ -37,7 +36,7 @@ const NavBar = () => {
               </Link>
             </Nav>
             <Nav className="d-flex">
-              <Nav.Link href="#menu" style={{scrollBehavior: "smooth"}}>
+              <Nav.Link href="#menu" style={{ scrollBehavior: "smooth" }}>
                 Menu
               </Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
@@ -53,10 +52,10 @@ const NavBar = () => {
                   Separated link
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="">
-                <BsCart4
-                  className=" fs-4 fw-bold"
-                  onClick={handleShow}
+              <Nav.Link href="" >
+                <MdDeliveryDining
+                  className=" fs-3 fw-bold"
+                  onClick={() => setSmShow(true)}
                   style={{ color: "white" }}
                 />
               </Nav.Link>
@@ -64,7 +63,7 @@ const NavBar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Cart show={show} handleClose={handleClose} />
+      <Cart smShow={smShow} onHide={()=>setSmShow(false)}/>
     </>
   );
 };
