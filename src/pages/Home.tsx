@@ -4,7 +4,7 @@ import LandingPage from "../components/LandingPage";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../redux/actions/menuAction";
 import { getProducts } from "../utilities/API";
-import logo from "../image/—Pngtree—seafood pizza with cheese_4942142.png";
+
 import Menu from "../components/Menu";
 
 const Home = () => {
@@ -20,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     getAllData();
   }, []);
-  
+
   const [filter, setFilter] = useState("All");
 
   function updateFilter(input: string) {

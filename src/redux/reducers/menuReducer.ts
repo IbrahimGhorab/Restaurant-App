@@ -6,7 +6,6 @@ export const menuReducer = (state = [], action: any) => {
     case "ADD_PRODUCT":
       return [...state, action.payload];
     default:
-        
       return state;
   }
 };

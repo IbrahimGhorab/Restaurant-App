@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
 import { ImSpoonKnife } from "react-icons/im";
-import {MdDeliveryDining} from "react-icons/md";
+import {BsCart4} from "react-icons/bs";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
 
@@ -53,7 +53,7 @@ const NavBar = () => {
                 </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="" >
-                <MdDeliveryDining
+                <BsCart4
                   className=" fs-3 fw-bold"
                   onClick={() => setSmShow(true)}
                   style={{ color: "white" }}

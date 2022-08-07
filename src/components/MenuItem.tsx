@@ -1,19 +1,38 @@
 import React, { useState } from "react";
-import { Card, Col, Image, Row, InputGroup } from "react-bootstrap";
+import { Card, Col, Image, InputGroup, Row } from "react-bootstrap";
 import logo from "../image/—Pngtree—seafood pizza with cheese_4942142.png";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { FaMinusCircle } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
 import { AppProp } from "../types";
+import { useDispatch } from "react-redux";
+import { addCartProduct } from "../redux/actions/cartActions";
 
 const MenuItem = ({ item }: AppProp) => {
+  
   const [qty, setQty] = useState(0);
+  const dispatch = useDispatch();
+
+  // const handelChange = (e: any) => {
+  //   setQty(e.target.value);
+  // };
+
+  function handelPlus() {
+    setQty(qty + 1);
+  }
+
+  const createCartObject = () => {
+    if (qty !== 0) {
+      dispatch(addCartProduct(item, qty));
+      alert("add success");
+    }
+  };
 
   function handelMinus() {
     if (qty <= 0) {
       return setQty(0);
     } else {
-      return setQty(qty - 1);
+      setQty(qty - 1);
     }
   }
   return (
@@ -39,21 +58,23 @@ const MenuItem = ({ item }: AppProp) => {
                     style={{ cursor: "pointer" }}
                     onClick={handelMinus}
                   />
-                  <InputGroup.Text className="" style={{ height: "25px" }}>
+                  <InputGroup.Text style={{ height: "30px", width: "30px" }}>
                     {qty}
                   </InputGroup.Text>
+
                   <BsFillPlusCircleFill
                     className="fs-4 fw-bold "
                     style={{ cursor: "pointer" }}
-                    onClick={() => setQty(qty + 1)}
+                    onClick={handelPlus}
                   />
                 </div>
               </Col>
               <Col>
-                <div className="pe-2 d-flex justify-content-end">
+                <div className="pe-3 d-flex justify-content-end ">
                   <BsCart4
-                    className="fs-3 fw-bold "
+                    className="fs-3 fw-bold"
                     style={{ cursor: "pointer" }}
+                    onClick={createCartObject}
                   />
                 </div>
               </Col>

@@ -4,7 +4,8 @@ export interface AppProp {
   smShow?: boolean;
   onHide?: Function;
   handleClose?: Function;
-  updateFilter?: Function;  
+  updateFilter?: Function;
+  cartItem?:Product
 }
 
 export interface Category {
