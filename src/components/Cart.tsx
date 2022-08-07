@@ -10,7 +10,6 @@ const Cart = ({ smShow, onHide }: AppProp) => {
   let cartProduct = useSelector((state: any) => state.cart);
 
   useEffect(() => {}, [cartProduct]);
-  console.log(cartProduct);
 
   const total = () => {
     if (cartProduct.length) {

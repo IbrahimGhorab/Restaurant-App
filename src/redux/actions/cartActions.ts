@@ -14,3 +14,10 @@ export const removeCartProduct = (product: any) => {
     payload: product,
   };
 };
+
+export const resetCart = () => {
+  return {
+    type: "RESET_CART",
+    payload: [],
+  };
+};

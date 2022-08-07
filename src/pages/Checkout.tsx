@@ -1,44 +1,116 @@
-import React from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  Row,
-  InputGroup,
-  Image,
-} from "react-bootstrap";
+import React, { useState } from "react";
+import { postOrder } from "../utilities/API";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import logo from "../image/—Pngtree—seafood pizza with cheese_4942142.png";
+import { useDispatch, useSelector } from "react-redux";
+import OrderItems from "../components/OrderItems";
+import { resetCart } from "../redux/actions/cartActions";
 
 const Checkout = () => {
   const orderDetails = useSelector((state: any) => state.cart);
+  const dispatch = useDispatch();
+  const [client, setClient] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    mobile: "",
+  });
+
+  const onSubmitOrder = async (values: any) => {
+    setClient({ ...values });
+    try {
+      await postOrder({ ...client, orderDetails });
+      dispatch(resetCart());
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <Container className="p-4 vh-100">
       <Row xs={1} md={2}>
         <Col md={7}>
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Control type="text" placeholder="Name" />
-            </Form.Group>
+            <div className="mb-3">
+              <input
+                className="mb-3"
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={client.firstName}
+                onChange={(e: any) =>
+                  setClient({ ...client, firstName: e.target.value })
+                }
+                placeholder="First Name"
+              />
+            </div>
+            <div className="mb-3">
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={client.lastName}
+                onChange={(e: any) =>
+                  setClient({ ...client, lastName: e.target.value })
+                }
+                placeholder="Last Name"
+              />
+            </div>
 
-            <Form.Group className="mb-3" controlId="formBasicMobile">
-              <Form.Control type="text" placeholder="Mobile" />
-            </Form.Group>
+            <div className="mb-3">
+              <input
+                type="text"
+                id="mobile"
+                name="mobile"
+                value={client.mobile}
+                onChange={(e: any) =>
+                  setClient({ ...client, mobile: e.target.value })
+                }
+                placeholder="Mobile"
+              />
+            </div>
 
-            <Form.Group className="mb-3" controlId="formBasicAddress">
-              <Form.Control type="text" placeholder="Address" />
-            </Form.Group>
+            <div className="mb-3">
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={client.address}
+                onChange={(e: any) =>
+                  setClient({ ...client, address: e.target.value })
+                }
+                placeholder="Address"
+              />
+            </div>
 
-            <Form.Group className="mb-3" controlId="formBasicAddress">
-              <Form.Control type="text" placeholder="City" />
-            </Form.Group>
+            <div className="mb-3">
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={client.city}
+                onChange={(e: any) =>
+                  setClient({ ...client, city: e.target.value })
+                }
+                placeholder="City"
+              />
+            </div>
 
             <div className="d-flex">
               <Link to="/orderStatus">
-                <Button variant="primary" type="submit">
+                <Button
+                  onClick={() =>
+                    onSubmitOrder({
+                      firstName: client.firstName,
+                      lastName: client.lastName,
+                      mobile: client.mobile,
+                      address: client.address,
+                      city: client.city,
+                    })
+                  }
+                  variant="primary"
+                  type="submit"
+                >
                   Order Now
                 </Button>
               </Link>
@@ -49,41 +121,8 @@ const Checkout = () => {
           </Form>
         </Col>
         <Col md={5}>
-          {orderDetails.map((item: any) => (
-            <Col key={item?.id}>
-              <Card className="" border="primary">
-                <Row className="g-2">
-                  <Col md={5}>
-                    <Image src={logo} width="100%" />
-                  </Col>
-                  <Col md={7} className="text-start">
-                    <Row className="">
-                      <Col>
-                        <Card.Title className="fw-bold">
-                          {item?.product.name}
-                        </Card.Title>
-                        <Card.Text>{item?.product.description}</Card.Text>
-                        <Card.Text>{item?.product.price} l.E</Card.Text>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <div className="d-flex justify-content-center gap-2">
-                          <InputGroup.Text
-                            style={{ height: "30px", width: "30px" }}
-                          >
-                            {item.quantity}
-                          </InputGroup.Text>
-                        </div>
-                      </Col>
-                      <Col>
-                        <div className="pe-3 d-flex justify-content-end "></div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </Card>
-            </Col>
+          {orderDetails.map((orderItem: any) => (
+            <OrderItems key={orderItem.product.id} orderItem={orderItem} />
           ))}
         </Col>
       </Row>
