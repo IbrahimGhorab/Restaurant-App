@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Button, Card, Col, Image, Row } from "react-bootstrap";
+import { Card, Col, Image, InputGroup, Row } from "react-bootstrap";
 import { removeCartProduct } from "../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
+import { MdDeleteForever } from "react-icons/md";
 import { AppProp } from "../types";
 
 const CartItem = ({ cartItem }: any) => {
-  const dispatch = useDispatch();   
+  const dispatch = useDispatch();
 
   const deleteItemFromCart = () => {
     dispatch(removeCartProduct(cartItem.product));
@@ -14,25 +15,57 @@ const CartItem = ({ cartItem }: any) => {
 
   useEffect(() => {}, [cartItem]);
   return (
-    <Col>
-      <Card>
-        <Row className="g-3">
-          <Col>
-            <Image
-              width="50%"
-              // style={{ width: "130px", height: "150px" }}
-              src="https://media-cdn.tripadvisor.com/media/photo-s/14/3e/82/1c/picture-says-it-all.jpg"
-            ></Image>
-          </Col>
-          <Col>
-            <p>{cartItem.product.name}</p>
-            <p>Qty: {cartItem.quantity}</p>
-            <p>Price: {cartItem.product.price}</p>
-            <p>Total: {cartItem.quantity * cartItem.product.price}</p>
-          </Col>
-        </Row>
+    <Col mx={12} md={12}>
+      <Card className="" border="light">
         <Row>
-          <Button onClick={deleteItemFromCart}>Remove Item</Button>
+          <Col md="6" className="d-flex align-items-center">
+            <Card.Img
+              as="img"
+              variant="top"
+              src={cartItem?.product.image}
+              style={{ backgroundSize: "cover", overflowY: "hidden" }}
+            />
+          </Col>
+          <Col md={6}>
+            <Card.Body className="text-center">
+              <Card.Title className="fs-3 fw-bold">
+                {cartItem?.product.name}
+              </Card.Title>
+              <Card.Text className="text-start">
+                {cartItem?.product.description}
+              </Card.Text>
+            </Card.Body>
+            <Row>
+              <Card.Body className="d-flex justify-content-center gap-2">
+                <Col>
+                  <Card.Text className="fs-6 fw-bold" style={{ color: "red" }}>
+                    {cartItem?.product.price} L.E
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <Card.Text className="fs-6 fw-bold" style={{ color: "red" }}>
+                    Qty: {cartItem.quantity}
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <Card.Text className="fs-6 fw-bold" style={{ color: "red" }}>
+                    Total :{cartItem.quantity * cartItem.product.price}
+                  </Card.Text>
+                </Col>
+              </Card.Body>
+            </Row>
+            <Card.Body className="pe-3 d-flex justify-content-end ">
+              <Row>
+                <Col>
+                  <MdDeleteForever
+                  className="fs-2"
+                    onClick={deleteItemFromCart}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Col>
+              </Row>
+            </Card.Body>
+          </Col>
         </Row>
       </Card>
     </Col>

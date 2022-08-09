@@ -6,16 +6,22 @@ import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import OrderStatus from "./pages/OrderStatus";
 import Checkout from "./pages/Checkout";
+import KitchenDashboard from "./pages/KitchenDashboard ";
+import PendingOrder from "./components/PendingOrder";
+import CompletedOrder from "./components/CompletedOrder";
 
 function App() {
-  
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/orderStatus" element={<OrderStatus/>}/>
-        <Route path="/checkout" element={<Checkout/>}/>
+        <Route path="/orderStatus" element={<OrderStatus />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/kitchendashboard" element={<KitchenDashboard />}>
+          <Route path="pendingorder" element={<PendingOrder />} />
+          <Route path="completedorder" element={<CompletedOrder />} />
+        </Route>
       </Routes>
       <Footer />
     </div>

@@ -20,12 +20,14 @@ const Checkout = () => {
   const onSubmitOrder = async (values: any) => {
     setClient({ ...values });
     try {
-      await postOrder({ ...client, orderDetails });
+      const newOrder= await postOrder({ ...client, orderDetails });
+      console.log(newOrder);
       dispatch(resetCart());
     } catch (e) {
       console.log(e);
     }
   };
+
   return (
     <Container className="p-4 vh-100">
       <Row xs={1} md={2}>

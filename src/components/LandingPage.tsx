@@ -4,13 +4,16 @@ import logo from "../image/png_pizza_15176.png";
 
 const LandingPage = () => {
   return (
-    <div style={{ backgroundColor: "#303030" }}>
-      <Container className="py-5 d-flex justify-content-center align-items-center text-start">
-        <p className="fs-1 fw-bold " style={{ color: "white" }}>
-          ENJOY OUR
-          <br /> DELICIOUS <span style={{ color: "#FF9200" }}>FOOD</span>
+    <div
+      className="hero d-flex justify-content-center align-items-center"
+      style={{ backgroundColor: "#303030" }}
+    >
+      <Container className="">
+        <p className="logo">Restaurant</p>
+        <p className="fs-2 fw-bold " style={{ color: "white" }}>
+          ENJOY OUR DELICIOUS <span style={{ color: "#FF9200" }}>FOOD</span>
         </p>
-        <Image fluid src={logo} alt="pizza photo" style={{ width: "50%" }} />
+        <hr className="line" />
       </Container>
     </div>
   );

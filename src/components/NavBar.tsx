@@ -3,10 +3,9 @@ import { useState } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
 import { ImSpoonKnife } from "react-icons/im";
-import {BsCart4} from "react-icons/bs";
+import { BsCart4 } from "react-icons/bs";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
-
 
 const NavBar = () => {
   const [smShow, setSmShow] = useState(false);
@@ -14,10 +13,10 @@ const NavBar = () => {
     <>
       <Navbar
         collapseOnSelect
+        // fixed="top"
         expand="lg"
         style={{ backgroundColor: "#303030" }}
         variant="dark"
-        
       >
         <Container>
           <Navbar.Brand href="#home" className="fs-2 fw-bold">
@@ -40,19 +39,11 @@ const NavBar = () => {
                 Menu
               </Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
+                <NavDropdown.Item as={Link} to="/kitchendashboard">
+                  Kitchen Dashboard
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="" >
+              <Nav.Link href="">
                 <BsCart4
                   className=" fs-3 fw-bold"
                   onClick={() => setSmShow(true)}
@@ -63,7 +54,7 @@ const NavBar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Cart smShow={smShow} onHide={()=>setSmShow(false)}/>
+      <Cart smShow={smShow} onHide={() => setSmShow(false)} />
     </>
   );
 };
