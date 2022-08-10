@@ -1,18 +1,21 @@
 import React from "react";
-import { Card, Form, ListGroup } from "react-bootstrap";
-import KitchenSaidBar from "./KitchenSaidBar";
+import Order from "./Order"
+import {  Container, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+
 
 const CompletedOrder = () => {
-  
+  const CompletedOrders = useSelector((state: any) => state.order);
+
   return (
-    <Card className="mt-3" style={{ width: "18rem" }}>
-      <Card.Header>Completed Orders</Card.Header>
-      <ListGroup variant="flush">
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-      </ListGroup>
-    </Card>
+    <Container>
+      <Row mx={1} md={3}>
+        {CompletedOrders.map(
+          (order: any) =>
+            order.isCompleted && <Order key={order.id} order={order} />
+        )}
+      </Row>
+    </Container>
   );
 };
 
