@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import KitchenSaidBar from "../components/KitchenSaidBar";
-import { getOrders } from "../redux/actions/orderAction";
+import { getOrders } from "../reduxtoolkit/slices/orderSlice";
 import { getAllOrders } from "../utilities/API";
 
 const KitchenDashboard = () => {
@@ -11,7 +11,7 @@ const KitchenDashboard = () => {
 
   const getOrdersInfo = async () => {
     try {
-      const ordersData = await getAllOrders();
+      const ordersData = await getAllOrders();      
       dispatch(getOrders(ordersData.data));
     } catch (error) {
       console.log(error);

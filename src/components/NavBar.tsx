@@ -1,19 +1,23 @@
 import React from "react";
 import { useState } from "react";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
+
 import { ImSpoonKnife } from "react-icons/im";
 import { BsCart4 } from "react-icons/bs";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../reduxtoolkit/hooks";
 
 const NavBar = () => {
-  const [smShow, setSmShow] = useState(false);
+  const [smShow, setSmShow] = useState<boolean>(false);
+  const cartList = useAppSelector((state) => state.cart);
+  let cartLingth = cartList.length;
   return (
     <>
       <Navbar
         collapseOnSelect
-        // fixed="top"
+        fixed="top"
         expand="lg"
         style={{ backgroundColor: "#303030" }}
         variant="dark"
@@ -38,17 +42,25 @@ const NavBar = () => {
               <Nav.Link href="#menu" style={{ scrollBehavior: "smooth" }}>
                 Menu
               </Nav.Link>
-              <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/kitchendashboard">
-                  Kitchen Dashboard
-                </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="">
+              <Nav.Link
+                as={Link}
+                to="/kitchendashboard"
+                className="d-flex align-items-center text-decoration-none fw-bold"
+                style={{ color: "white" }}
+              >
+                Kitchen Dashboard
+              </Nav.Link>
+
+              <Nav.Link href="" className="position-relative">
                 <BsCart4
                   className=" fs-3 fw-bold"
                   onClick={() => setSmShow(true)}
                   style={{ color: "white" }}
                 />
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  +{cartLingth}
+                  <span className="visually-hidden">unread messages</span>
+                </span>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

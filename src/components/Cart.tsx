@@ -1,22 +1,24 @@
 import React, { useEffect } from "react";
 import { Button, Modal, Row, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import logo from "../image/—Pngtree—seafood pizza with cheese_4942142.png";
+import { useAppSelector } from "../reduxtoolkit/hooks";
 import { AppProp } from "../types";
 import CartItem from "./CartItem";
 
 const Cart = ({ smShow, onHide }: AppProp) => {
-  let cartProduct = useSelector((state: any) => state.cart);
+  let cartProduct = useAppSelector((state) => state.cart);
+
+  console.log(cartProduct);
 
   useEffect(() => {}, [cartProduct]);
 
   const total = () => {
     if (cartProduct.length) {
       let amount = cartProduct?.map(
-        (cartItem: any) => cartItem.quantity * cartItem.product.price
+        (cartItem) => cartItem.quantity * cartItem.price
       );
-      let totalAmount = amount.reduce((acc: any, cur: any) => acc + cur);
+      let totalAmount = amount.reduce((acc: number, cur: number) => acc + cur);
       return totalAmount;
     }
   };
@@ -37,8 +39,8 @@ const Cart = ({ smShow, onHide }: AppProp) => {
       <Modal.Body>
         <Container>
           <Row md={1}>
-            {cartProduct.map((cartItem: any) => (
-              <CartItem key={cartItem.product.id} cartItem={cartItem} />
+            {cartProduct.map((cartItem) => (
+              <CartItem key={cartItem.id} cartItem={cartItem} />
             ))}
           </Row>
         </Container>

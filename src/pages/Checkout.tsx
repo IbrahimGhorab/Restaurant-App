@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { postOrder } from "../utilities/API";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import OrderItems from "../components/OrderItems";
-import { resetCart } from "../redux/actions/cartActions";
+import { resetCart } from "../reduxtoolkit/slices/cartSlice";
+import { useAppSelector } from "../reduxtoolkit/hooks";
 
 const Checkout = () => {
-  const orderDetails = useSelector((state: any) => state.cart);
+  const orderDetails = useAppSelector((state) => state.cart);
+
   const dispatch = useDispatch();
-  const [client, setClient] = useState({
+  const [client, setClient] = useState<{[key:string]:string}>({
     firstName: "",
     lastName: "",
     address: "",
@@ -17,11 +19,11 @@ const Checkout = () => {
     mobile: "",
   });
 
-  const onSubmitOrder = async (values: any) => {
+  const onSubmitOrder = async (values: React.SetStateAction<{ [key: string]: string; }>) => {
     setClient({ ...values });
     try {
-      const newOrder= await postOrder({ ...client, orderDetails });
-      console.log(newOrder);
+      await postOrder({ ...client, orderDetails });
+
       dispatch(resetCart());
     } catch (e) {
       console.log(e);
@@ -30,7 +32,7 @@ const Checkout = () => {
 
   return (
     <Container className="p-4 vh-100">
-      <Row xs={1} md={2}>
+      <Row xs={1} md={2} style={{ paddingTop: "80px" }}>
         <Col md={7}>
           <Form>
             <div className="mb-3">
@@ -40,7 +42,7 @@ const Checkout = () => {
                 id="firstName"
                 name="firstName"
                 value={client.firstName}
-                onChange={(e: any) =>
+                onChange={(e) =>
                   setClient({ ...client, firstName: e.target.value })
                 }
                 placeholder="First Name"
@@ -52,7 +54,7 @@ const Checkout = () => {
                 id="lastName"
                 name="lastName"
                 value={client.lastName}
-                onChange={(e: any) =>
+                onChange={(e) =>
                   setClient({ ...client, lastName: e.target.value })
                 }
                 placeholder="Last Name"
@@ -65,7 +67,7 @@ const Checkout = () => {
                 id="mobile"
                 name="mobile"
                 value={client.mobile}
-                onChange={(e: any) =>
+                onChange={(e) =>
                   setClient({ ...client, mobile: e.target.value })
                 }
                 placeholder="Mobile"
@@ -78,7 +80,7 @@ const Checkout = () => {
                 id="address"
                 name="address"
                 value={client.address}
-                onChange={(e: any) =>
+                onChange={(e) =>
                   setClient({ ...client, address: e.target.value })
                 }
                 placeholder="Address"
@@ -91,7 +93,7 @@ const Checkout = () => {
                 id="city"
                 name="city"
                 value={client.city}
-                onChange={(e: any) =>
+                onChange={(e) =>
                   setClient({ ...client, city: e.target.value })
                 }
                 placeholder="City"
@@ -123,8 +125,8 @@ const Checkout = () => {
           </Form>
         </Col>
         <Col md={5}>
-          {orderDetails.map((orderItem: any) => (
-            <OrderItems key={orderItem.product.id} orderItem={orderItem} />
+          {orderDetails.map((orderItem) => (
+            <OrderItems key={orderItem.id} orderItem={orderItem} />
           ))}
         </Col>
       </Row>

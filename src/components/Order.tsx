@@ -2,13 +2,29 @@ import React, { useEffect } from "react";
 import { Button, Card, Col, Form, ListGroup } from "react-bootstrap";
 import Clock from "react-live-clock";
 import OrderLine from "./OrderLine";
-import { updateOrder } from "../utilities/API";
+import { getAllOrders, updateOrder } from "../utilities/API";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import { getOrders } from "../reduxtoolkit/slices/orderSlice";
+import { OrderType } from "../types";
 
-const Order = ({ order }: any) => {
-  console.log(order);
+const Order = ({ order }: { order: OrderType }) => {
+  const dispatch = useDispatch();
 
-  function orderTimer(order: any) {
+  const getOrdersInfo = async () => {
+    try {
+      const ordersData = await getAllOrders();
+      dispatch(getOrders(ordersData.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getOrdersInfo();
+  }, [order]);
+
+  function orderTimer(order: OrderType) {
     let now = new Date(Date.now()).getTime();
     let then = new Date(order.createdAt).getTime();
     let different = Math.round(now - then);
@@ -17,8 +33,6 @@ const Order = ({ order }: any) => {
   const updateOrderStatus = async () => {
     await updateOrder(order.id);
   };
-
-  useEffect(() => {}, [order]);
 
   return (
     <Col>
@@ -45,8 +59,8 @@ const Order = ({ order }: any) => {
         </Card.Header>
         <ListGroup variant="flush">
           <Form.Group className="mb-3 px-3" controlId="formBasicCheckbox">
-            {order.orderLines.map((productOrders: any) => (
-              <OrderLine key={productOrders.id} productOrders={productOrders} />
+            {order.orderLines.map((orderLine) => (
+              <OrderLine key={orderLine.id} orderLine={orderLine} />
             ))}
           </Form.Group>
         </ListGroup>

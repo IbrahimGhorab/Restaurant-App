@@ -5,7 +5,7 @@ const KitchenSaidBar = () => {
   return (
     <div
       className="vh-100 text-center"
-      style={{ backgroundColor: "#303030", color: "white" }}
+      style={{ backgroundColor: "#303030", color: "white",paddingTop:"80px" }}
     >
       <h3>Dash Board</h3>
       <Link

@@ -1,9 +1,9 @@
 import React from "react";
-import logo from "../image/—Pngtree—seafood pizza with cheese_4942142.png";
-
 import { Card, Col, Row } from "react-bootstrap";
+import { Cart, OrderType, OrderLineType } from "../types";
 
-const OrderItems = ({ orderItem }: any) => {
+const OrderItems = ({ orderItem }: {orderItem:Cart}) => {
+
   return (
     <Col mx={12} md={12} className="pt-5">
       <Card className="" border="light">
@@ -12,14 +12,14 @@ const OrderItems = ({ orderItem }: any) => {
             <Card.Img
               as="img"
               variant="top"
-              src={orderItem?.product.image}
+              src={orderItem?.image}
               style={{ backgroundSize: "cover", overflowY: "hidden" }}
             />
           </Col>
           <Col md={7}>
             <Card.Body className="text-center">
               <Card.Title className="fs-3 fw-bold">
-                {orderItem?.product.name}
+                {orderItem?.name}
               </Card.Title>
               {/* <Card.Text className="text-start">
                 {orderItem?.product.description}
@@ -29,7 +29,7 @@ const OrderItems = ({ orderItem }: any) => {
               <Card.Body className="d-flex justify-content-center gap-2">
                 <Col>
                   <Card.Text className="fs-6 fw-bold" style={{ color: "red" }}>
-                    {orderItem?.product.price} L.E
+                    {orderItem?.price} L.E
                   </Card.Text>
                 </Col>
                 <Col>
@@ -39,7 +39,7 @@ const OrderItems = ({ orderItem }: any) => {
                 </Col>
                 <Col>
                   <Card.Text className="fs-6 fw-bold" style={{ color: "red" }}>
-                    Total :{orderItem.quantity * orderItem.product.price}
+                    Total :{orderItem.quantity * orderItem.price}
                   </Card.Text>
                 </Col>
               </Card.Body>

@@ -1,6 +1,5 @@
 import React from "react";
-import { Container, Image } from "react-bootstrap";
-import logo from "../image/png_pizza_15176.png";
+import { Container } from "react-bootstrap";
 
 const LandingPage = () => {
   return (

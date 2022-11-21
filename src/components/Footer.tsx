@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
 import { ImSpoonKnife } from "react-icons/im";
 import { BsCart4 } from "react-icons/bs";

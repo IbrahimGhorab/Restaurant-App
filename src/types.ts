@@ -5,7 +5,7 @@ export interface AppProp {
   onHide?: Function;
   handleClose?: Function;
   updateFilter?: Function;
-  cartItem?:Product
+  cartItem?: Product;
 }
 
 export interface Category {
@@ -28,18 +28,27 @@ export interface Product {
   description: string;
   image: string;
   price: number;
+  isPopular: boolean;
+  category: string;
 }
 
-export interface Order {
-  id: number;
+export interface OrderType {
+  id: string;
   orderNumber: string;
   isCompleted: boolean;
   client: Client;
+  createdAt: Date;
+  updatedAt: Date;
+  orderLines: OrderLineType[];
 }
 
-export interface OrderLine {
+export interface OrderLineType {
   id: number;
   quantity: number;
-  order: Order;
+  order: OrderType;
   product: Product;
+}
+
+export interface Cart extends Product {
+  quantity: number;
 }
