@@ -1,4 +1,4 @@
-import { getOrders } from "../redux/actions/orderAction";
+import { getOrders } from "../reduxtoolkit/slices/orderSlice";
 import { getAllOrders } from "./API";
 import { useDispatch } from "react-redux";
 
