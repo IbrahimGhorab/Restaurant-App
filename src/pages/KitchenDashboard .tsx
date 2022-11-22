@@ -23,7 +23,7 @@ const KitchenDashboard = () => {
   }, []);
 
   return (
-    <div className="vh-100">
+    <div className="min-vh-100">
       <Row md={2}>
         <Col md={3}>
           <KitchenSaidBar />

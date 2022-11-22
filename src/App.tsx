@@ -19,6 +19,7 @@ function App() {
         <Route path="/orderStatus" element={<OrderStatus />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/kitchendashboard" element={<KitchenDashboard />}>
+          <Route index element={<PendingOrder />} />
           <Route path="pendingorder" element={<PendingOrder />} />
           <Route path="completedorder" element={<CompletedOrder />} />
         </Route>
