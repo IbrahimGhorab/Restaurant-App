@@ -19,7 +19,10 @@ const PendingOrder = () => {
   }, []);
 
   return (
-    <Container className="text-center" style={{ paddingTop: "80px" }}>
+    <Container
+      className="text-center"
+      style={{ paddingTop: "80px", paddingBottom: "10px" }}
+    >
       <h3>Pending Orders</h3>
       <Row mx={1} md={3}>
         {pendingOrders.map(

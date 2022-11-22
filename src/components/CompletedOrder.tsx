@@ -7,7 +7,7 @@ const CompletedOrder = () => {
   const CompletedOrders = useAppSelector((state) => state.order);
 
   return (
-    <Container className="" style={{ paddingTop: "80px" }}>
+    <Container className="" style={{ paddingTop: "80px",paddingBottom:"10px" }}>
       <h3>Completed Orders</h3>
       <Row mx={1} md={3}>
         {CompletedOrders.map(
