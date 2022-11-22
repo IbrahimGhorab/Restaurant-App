@@ -43,7 +43,7 @@ export const cartSlice = createSlice({
       }
     },
     removeCartProduct: (state, action) => {
-      return action.payload;
+      return state.filter((item) => item.id !== action.payload.id);
     },
     resetCart: () => {
       return initialState;
