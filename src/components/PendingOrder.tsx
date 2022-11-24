@@ -20,7 +20,7 @@ const PendingOrder = () => {
 
   return (
     <Container
-      className="text-center"
+      className="min-vh-100 text-center"
       style={{ paddingTop: "80px", paddingBottom: "10px" }}
     >
       <h3>Pending Orders</h3>

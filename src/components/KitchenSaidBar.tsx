@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 const KitchenSaidBar = () => {
   return (
     <div
-      className="min-vh-100 text-center"
-      style={{ backgroundColor: "#303030", color: "white",paddingTop:"80px" }}
+      className="text-center"
+      style={{
+        backgroundColor: "#303030",
+        color: "white",
+        paddingTop: "80px",
+        minHeight: "100%",
+      }}
     >
       <h3>Dash Board</h3>
       <Link
