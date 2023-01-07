@@ -36,7 +36,7 @@ const Checkout = () => {
     <Container className="p-4 vh-100">
       <Row xs={1} md={2} style={{ paddingTop: "80px" }}>
         <Col md={7}>
-          <Form>
+          <Form className="pt-5">
             <div className="mb-3">
               <input
                 className="w-100"
