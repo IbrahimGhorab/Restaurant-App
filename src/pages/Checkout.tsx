@@ -11,7 +11,7 @@ const Checkout = () => {
   const orderDetails = useAppSelector((state) => state.cart);
 
   const dispatch = useDispatch();
-  const [client, setClient] = useState<{[key:string]:string}>({
+  const [client, setClient] = useState<{ [key: string]: string }>({
     firstName: "",
     lastName: "",
     address: "",
@@ -19,7 +19,9 @@ const Checkout = () => {
     mobile: "",
   });
 
-  const onSubmitOrder = async (values: React.SetStateAction<{ [key: string]: string; }>) => {
+  const onSubmitOrder = async (
+    values: React.SetStateAction<{ [key: string]: string }>
+  ) => {
     setClient({ ...values });
     try {
       await postOrder({ ...client, orderDetails });
@@ -37,7 +39,7 @@ const Checkout = () => {
           <Form>
             <div className="mb-3">
               <input
-                className="mb-3"
+                className="w-100"
                 type="text"
                 id="firstName"
                 name="firstName"
@@ -50,6 +52,7 @@ const Checkout = () => {
             </div>
             <div className="mb-3">
               <input
+                className="w-100"
                 type="text"
                 id="lastName"
                 name="lastName"
@@ -63,6 +66,7 @@ const Checkout = () => {
 
             <div className="mb-3">
               <input
+                className="w-100"
                 type="text"
                 id="mobile"
                 name="mobile"
@@ -76,6 +80,7 @@ const Checkout = () => {
 
             <div className="mb-3">
               <input
+                className="w-100"
                 type="text"
                 id="address"
                 name="address"
@@ -89,13 +94,12 @@ const Checkout = () => {
 
             <div className="mb-3">
               <input
+                className="w-100 "
                 type="text"
                 id="city"
                 name="city"
                 value={client.city}
-                onChange={(e) =>
-                  setClient({ ...client, city: e.target.value })
-                }
+                onChange={(e) => setClient({ ...client, city: e.target.value })}
                 placeholder="City"
               />
             </div>
